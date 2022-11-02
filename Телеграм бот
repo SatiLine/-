@@ -1,0 +1,29 @@
+import telebot
+from telebot import types
+
+bot = telebot.TeleBot('5726687972:AAH8zmu4uWjONqD70QikTR-7GQjj7kYo-Hs')
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.send_message(message.chat.id, '<b>Наконец, ты, сука, снизошла до меня</b>', parse_mode='html')
+
+@bot.message_handler(content_types=['text'])
+def get_user_text(message):
+    if message.text == 'Что...':
+        bot.send_message(message.chat.id, 'Ну, давай поговорим', parse_mode='html')
+    elif message.text == 'Кто ты?':
+        bot.send_message(message.chat.id, 'ТЫ, ЗАБЫЛ МЕНЯ!!!!!', parse_mode='html')
+    elif message.text == 'Какие наглые мошенники нынче пошли':
+        bot.send_message(message.chat.id, 'Ты назвала Великого Франца мошенником?', parse_mode='html')
+    elif message.text == 'фото':
+        photo = open('kosmonavt_siluet_svechenie_151318_1920x1080.jpg', 'rb')
+        bot.send_photo(message.chat.id, photo)
+    else:
+        bot.send_message(message.chat.id, 'Ты повредилась головой? Иначе я не понимаю зачем ты мне пишешь такую ересь', parse_mode='html')
+
+
+@bot.message_handler(content_types=['photo'])
+def get_user_photo(message):
+    bot.send_message(message.chat.id, 'Лучше бы свое фото мне на память отправила ;)')
+
+bot.polling(none_stop=True)
